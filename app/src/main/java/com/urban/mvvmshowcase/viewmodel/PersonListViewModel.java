@@ -37,7 +37,7 @@ public class PersonListViewModel extends ViewModel {
         return mLoading;
     }
 
-    private void setLoading(boolean loading) {
+    protected void setLoading(boolean loading) {
         mLoading = loading;
     }
 

@@ -9,10 +9,11 @@ import com.urban.mvvmshowcase.R;
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding;
 import com.urban.mvvmshowcase.model.repository.FakePersonRepository;
 import com.urban.mvvmshowcase.view.adapter.PeopleAdapter;
+import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 
 public class MainActivity extends AppCompatActivity implements PersonListViewModel.PeopleListObserver {
-    private PersonListViewModel mPersonViewModel;
+    private AndroidPersonListViewModel mPersonViewModel;
     private PeopleAdapter mPeopleAdapter;
 
     @Override
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements PersonListViewMod
     }
 
     private void configureViewModel(ActivityMainBinding viewBinding) {
-        mPersonViewModel = (PersonListViewModel) getLastCustomNonConfigurationInstance();
+        mPersonViewModel = (AndroidPersonListViewModel) getLastCustomNonConfigurationInstance();
         if (mPersonViewModel == null) {
-            mPersonViewModel = new PersonListViewModel(FakePersonRepository.create());
+            mPersonViewModel = new AndroidPersonListViewModel(FakePersonRepository.create());
         }
         mPersonViewModel.setListObserver(this);
         viewBinding.setVm(mPersonViewModel);
