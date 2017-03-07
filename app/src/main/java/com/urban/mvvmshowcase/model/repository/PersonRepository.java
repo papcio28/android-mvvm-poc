@@ -8,4 +8,6 @@ import io.reactivex.Observable;
 
 public interface PersonRepository {
     Observable<List<Person>> peopleList();
+
+    void add(Person person);
 }

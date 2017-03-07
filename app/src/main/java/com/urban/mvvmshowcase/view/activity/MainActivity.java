@@ -1,9 +1,10 @@
-package com.urban.mvvmshowcase.view;
+package com.urban.mvvmshowcase.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.urban.mvvmshowcase.R;
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding;
@@ -12,9 +13,14 @@ import com.urban.mvvmshowcase.view.adapter.PeopleAdapter;
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 
-public class MainActivity extends AppCompatActivity implements PersonListViewModel.PeopleListObserver {
-    private AndroidPersonListViewModel mPersonViewModel;
+public class MainActivity extends AbstractViewModelActivity<AndroidPersonListViewModel>
+        implements PersonListViewModel.PeopleListObserver {
     private PeopleAdapter mPeopleAdapter;
+
+    @Override
+    protected AndroidPersonListViewModel createViewModel() {
+        return new AndroidPersonListViewModel(FakePersonRepository.create());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +37,31 @@ public class MainActivity extends AppCompatActivity implements PersonListViewMod
     }
 
     private void configureViewModel(ActivityMainBinding viewBinding) {
-        mPersonViewModel = (AndroidPersonListViewModel) getLastCustomNonConfigurationInstance();
-        if (mPersonViewModel == null) {
-            mPersonViewModel = new AndroidPersonListViewModel(FakePersonRepository.create());
+        vm().setListObserver(this);
+        viewBinding.setVm(vm());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_save) {
+            onSaveMenuItemSelected();
         }
-        mPersonViewModel.setListObserver(this);
-        viewBinding.setVm(mPersonViewModel);
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return mPersonViewModel;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPersonViewModel.onShow();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPersonViewModel.onHide();
+    private boolean onSaveMenuItemSelected() {
+        CreatePersonActivity.start(this);
+        return true;
     }
 
     @Override
     public void onPeopleListChanged() {
-        mPeopleAdapter.setPeople(mPersonViewModel.getPeople());
+        mPeopleAdapter.setPeople(vm().getPeople());
     }
 }

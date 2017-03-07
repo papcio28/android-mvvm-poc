@@ -18,7 +18,7 @@ public class AndroidPersonListViewModel extends PersonListViewModel {
     }
 
     @Override
-    protected void setLoading(boolean loading) {
+    public void setLoading(boolean loading) {
         mLoading.set(loading);
     }
 }

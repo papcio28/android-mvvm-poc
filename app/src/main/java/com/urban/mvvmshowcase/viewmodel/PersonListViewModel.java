@@ -11,7 +11,7 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
-public class PersonListViewModel extends ViewModel {
+public class PersonListViewModel implements ViewModel {
     // Bindables
     private List<Person> mPeople = Collections.emptyList();
     private boolean mLoading = true;
@@ -37,7 +37,7 @@ public class PersonListViewModel extends ViewModel {
         return mLoading;
     }
 
-    protected void setLoading(boolean loading) {
+    public void setLoading(boolean loading) {
         mLoading = loading;
     }
 

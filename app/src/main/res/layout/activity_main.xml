@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="vm"
             type="com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel"/>

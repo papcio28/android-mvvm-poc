@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonCreateViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:addTextChangedListener="@{vm.personNameWatcher}"
+            android:text="@{vm.personName}"/>
+
+        <EditText
+            android:id="@+id/person_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:addTextChangedListener="@{vm.personAgeWatcher}"
+            android:inputType="number"
+            android:text="@{``+vm.personAge}"/>
+
+        <Button
+            android:id="@+id/person_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm.onPersonSave}"
+            android:text="Save"/>
+    </LinearLayout>
+</layout>

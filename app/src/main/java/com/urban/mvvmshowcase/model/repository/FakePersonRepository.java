@@ -5,8 +5,10 @@ import com.urban.mvvmshowcase.model.entity.Person;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.subjects.ReplaySubject;
 import io.reactivex.subjects.Subject;
 
@@ -16,6 +18,10 @@ public class FakePersonRepository implements PersonRepository {
 
     private FakePersonRepository() {
         mPeople.add(new Person("Paweł Urban", 27, Collections.emptyList()));
+        dispatchRefresh();
+    }
+
+    private void dispatchRefresh() {
         mPeopleSubject.onNext(mPeople);
     }
 
@@ -26,6 +32,12 @@ public class FakePersonRepository implements PersonRepository {
     @Override
     public Observable<List<Person>> peopleList() {
         return mPeopleSubject;
+    }
+
+    @Override
+    public void add(Person person) {
+        mPeople.add(person);
+        dispatchRefresh();
     }
 
     private static final class InstanceHolder {

@@ -1,7 +1,7 @@
 package com.urban.mvvmshowcase.viewmodel;
 
-abstract class ViewModel {
-    public abstract void onShow();
+public interface ViewModel {
+    void onShow();
 
-    public abstract void onHide();
+    void onHide();
 }
