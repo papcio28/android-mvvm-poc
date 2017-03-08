@@ -61,10 +61,8 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements View
         };
     }
 
-    public View.OnClickListener getOnPersonSave() {
-        return (__) -> {
-            mPersonCreateViewModel.onSavePerson();
-        };
+    public void onPersonSave() {
+        mPersonCreateViewModel.onSavePerson();
     }
 
     @Override

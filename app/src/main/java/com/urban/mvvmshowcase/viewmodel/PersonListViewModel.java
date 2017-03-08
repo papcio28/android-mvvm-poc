@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class PersonListViewModel implements ViewModel {
     // Bindables
@@ -45,7 +46,12 @@ public class PersonListViewModel implements ViewModel {
     public void onShow() {
         setLoading(true);
         mPeopleSubscription = mPersonRepository.peopleList()
-                .subscribe(this::stopPeopleLoading);
+                .subscribe(new Consumer<List<Person>>() {
+                    @Override
+                    public void accept(List<Person> people) throws Exception {
+                        stopPeopleLoading(people);
+                    }
+                });
     }
 
     private void stopPeopleLoading(@NonNull List<Person> people) {

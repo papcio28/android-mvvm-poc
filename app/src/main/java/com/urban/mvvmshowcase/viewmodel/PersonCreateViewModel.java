@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.model.repository.PersonRepository;
 
-import java.util.Collections;
-
 public class PersonCreateViewModel implements ViewModel {
     private String mPersonName;
     private int mPersonAge = 18;
@@ -37,7 +35,7 @@ public class PersonCreateViewModel implements ViewModel {
     }
 
     public void onSavePerson() {
-        mPersonRepository.add(new Person(getPersonName(), getPersonAge(), Collections.emptyList()));
+        mPersonRepository.add(new Person(getPersonName(), getPersonAge()));
         mNavigator.hide();
     }
 

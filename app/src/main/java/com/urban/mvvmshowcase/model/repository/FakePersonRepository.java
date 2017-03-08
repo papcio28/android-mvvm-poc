@@ -17,7 +17,7 @@ public class FakePersonRepository implements PersonRepository {
     private final Subject<List<Person>> mPeopleSubject = ReplaySubject.createWithSize(1);
 
     private FakePersonRepository() {
-        mPeople.add(new Person("Paweł Urban", 27, Collections.emptyList()));
+        mPeople.add(new Person("Paweł Urban", 27));
         dispatchRefresh();
     }
 

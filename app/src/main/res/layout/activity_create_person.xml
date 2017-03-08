@@ -36,7 +36,7 @@
             android:id="@+id/person_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{vm.onPersonSave}"
+            android:onClick="@{(v) -> vm.onPersonSave()}"
             android:text="Save"/>
     </LinearLayout>
 </layout>
