@@ -1,6 +1,7 @@
 package com.urban.mvvmshowcase.view.activity;
 
 import com.urban.mvvmshowcase.BuildConfig;
+import com.urban.mvvmshowcase.utility.ActivityUtil;
 import com.urban.mvvmshowcase.viewmodel.ViewModel;
 
 import org.junit.Before;
@@ -51,7 +52,7 @@ public class AbstractViewModelActivityTest {
         activity.setTestViewModel(viewModel);
 
         // act
-        fullStartActivity();
+        ActivityUtil.freshActivityStart(activityController);
 
         // assert
         verify(viewModel, times(1)).onShow();
@@ -63,7 +64,7 @@ public class AbstractViewModelActivityTest {
         activity.setTestViewModel(viewModel);
 
         // act
-        fullStartActivity()
+        ActivityUtil.freshActivityStart(activityController)
                 .pause().stop().destroy();
 
         // assert
@@ -76,13 +77,9 @@ public class AbstractViewModelActivityTest {
         activity.setTestViewModel(viewModel);
 
         // act
-        fullStartActivity();
+        ActivityUtil.freshActivityStart(activityController);
 
         // assert
         assertEquals(viewModel, activity.onRetainCustomNonConfigurationInstance());
-    }
-
-    private ActivityController<TestViewModelActivity> fullStartActivity() {
-        return activityController.create().start().resume().visible();
     }
 }
