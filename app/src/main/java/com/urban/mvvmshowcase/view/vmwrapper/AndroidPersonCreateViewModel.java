@@ -3,14 +3,18 @@ package com.urban.mvvmshowcase.view.vmwrapper;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.os.Bundle;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.view.utility.DefaultTextWatcher;
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel;
-import com.urban.mvvmshowcase.viewmodel.ViewModel;
 
-public class AndroidPersonCreateViewModel extends BaseObservable implements ViewModel {
+public class AndroidPersonCreateViewModel extends BaseObservable implements SavingStateViewModel {
+    private static final String STATE_KEY_NAME = "name";
+    private static final String STATE_KEY_AGE = "age";
+
     private final PersonCreateViewModel createViewModel;
 
     @BindingAdapter("android:onClick")
@@ -62,5 +66,17 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements View
     @Override
     public void onHide() {
         createViewModel.onHide();
+    }
+
+    @Override
+    public void onSaveState(Bundle state) {
+        state.putString(STATE_KEY_NAME, getPersonName());
+        state.putInt(STATE_KEY_AGE, getPersonAge());
+    }
+
+    @Override
+    public void onRestoreState(Bundle state) {
+        createViewModel.setPersonName(state.getString(STATE_KEY_NAME, ""));
+        createViewModel.setPersonAge(state.getInt(STATE_KEY_AGE, Person.DEFAULT_AGE));
     }
 }

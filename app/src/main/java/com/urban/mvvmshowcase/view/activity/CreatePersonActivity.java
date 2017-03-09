@@ -13,7 +13,7 @@ import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonCreateViewModel;
 import com.urban.mvvmshowcase.viewmodel.Navigator;
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel;
 
-public class CreatePersonActivity extends AbstractViewModelActivity<AndroidPersonCreateViewModel>
+public class CreatePersonActivity extends AbstractSavingStateViewModelActivity<AndroidPersonCreateViewModel>
         implements Navigator {
     public static void start(@NonNull Context context) {
         context.startActivity(new Intent(context, CreatePersonActivity.class));

@@ -1,11 +1,41 @@
 package com.urban.mvvmshowcase.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Value;
+import java.util.Locale;
 
-@Value
-@AllArgsConstructor(suppressConstructorProperties = true)
 public class Person {
-    String name;
-    int age;
+    public static final int DEFAULT_AGE = 18;
+
+    private final String name;
+    private final int age;
+
+    public Person(String name) {
+        this.name = name;
+        this.age = DEFAULT_AGE;
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Person withAge(int age) {
+        return new Person(getName(), age);
+    }
+
+    public Person withName(String name) {
+        return new Person(name, getAge());
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.getDefault(), "%s [%d]", getName(), getAge());
+    }
 }

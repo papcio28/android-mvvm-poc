@@ -11,7 +11,7 @@ public class PersonCreateViewModel implements ViewModel {
 
     // Bindables
     private String mPersonName;
-    private int mPersonAge = 18;
+    private int mPersonAge = Person.DEFAULT_AGE;
 
     public PersonCreateViewModel(@NonNull Navigator navigator,
                                  @NonNull PersonRepository personRepository) {
