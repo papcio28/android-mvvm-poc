@@ -6,13 +6,12 @@ import android.databinding.BindingAdapter;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.urban.mvvmshowcase.BR;
 import com.urban.mvvmshowcase.view.utility.DefaultTextWatcher;
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel;
 import com.urban.mvvmshowcase.viewmodel.ViewModel;
 
 public class AndroidPersonCreateViewModel extends BaseObservable implements ViewModel {
-    private final PersonCreateViewModel mPersonCreateViewModel;
+    private final PersonCreateViewModel createViewModel;
 
     @BindingAdapter("android:onClick")
     public static void setOnClickListener(View view, View.OnClickListener listener) {
@@ -20,34 +19,24 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements View
     }
 
     public AndroidPersonCreateViewModel(PersonCreateViewModel personCreateViewModel) {
-        mPersonCreateViewModel = personCreateViewModel;
+        createViewModel = personCreateViewModel;
     }
 
     @Bindable
     public String getPersonName() {
-        return mPersonCreateViewModel.getPersonName();
-    }
-
-    public void setPersonName(String personName) {
-        mPersonCreateViewModel.setPersonName(personName);
-        notifyPropertyChanged(BR.personName);
+        return createViewModel.getPersonName();
     }
 
     @Bindable
     public int getPersonAge() {
-        return mPersonCreateViewModel.getPersonAge();
-    }
-
-    public void setPersonAge(int personAge) {
-        mPersonCreateViewModel.setPersonAge(personAge);
-        notifyPropertyChanged(BR.personAge);
+        return createViewModel.getPersonAge();
     }
 
     public TextWatcher getPersonNameWatcher() {
         return new DefaultTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPersonCreateViewModel.setPersonName(s.toString());
+                createViewModel.setPersonName(s.toString());
             }
         };
     }
@@ -56,22 +45,22 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements View
         return new DefaultTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPersonCreateViewModel.setPersonAge(s.length() == 0 ? 0 : Integer.parseInt(s.toString()));
+                createViewModel.setPersonAge(s.length() == 0 ? 0 : Integer.parseInt(s.toString()));
             }
         };
     }
 
     public void onPersonSave() {
-        mPersonCreateViewModel.onSavePerson();
+        createViewModel.onSavePerson();
     }
 
     @Override
     public void onShow() {
-        mPersonCreateViewModel.onShow();
+        createViewModel.onShow();
     }
 
     @Override
     public void onHide() {
-        mPersonCreateViewModel.onHide();
+        createViewModel.onHide();
     }
 }

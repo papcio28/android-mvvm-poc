@@ -6,18 +6,19 @@ import com.urban.mvvmshowcase.model.repository.PersonRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.ReplaySubject;
 import io.reactivex.subjects.Subject;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -26,17 +27,17 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonListViewModelTest {
     @Mock
-    private PersonRepository mPersonRepository;
-    private PersonListViewModel mViewModel;
+    private PersonRepository peopleRepository;
+    private PersonListViewModel viewModel;
 
     @Before
     public void setUp() {
-        mViewModel = new PersonListViewModel(mPersonRepository);
+        viewModel = new PersonListViewModel(peopleRepository);
     }
 
     @Test
     public void shouldLoadOnFirstShow() {
-        assertTrue(mViewModel.isLoading());
+        assertTrue(viewModel.isLoading());
     }
 
     @Test
@@ -45,11 +46,11 @@ public class PersonListViewModelTest {
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
 
         // when
-        mViewModel.onShow();
-        testSubject.onNext(Collections.emptyList());
+        viewModel.onShow();
+        testSubject.onNext(Collections.<Person>emptyList());
 
         // then
-        assertFalse(mViewModel.isLoading());
+        assertFalse(viewModel.isLoading());
     }
 
     @Test
@@ -57,14 +58,14 @@ public class PersonListViewModelTest {
         // given
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
         PersonListViewModel.PeopleListObserver mockObserver = mock(PersonListViewModel.PeopleListObserver.class);
-        mViewModel.setListObserver(mockObserver);
+        viewModel.setListObserver(mockObserver);
 
         // when
-        mViewModel.onShow();
-        testSubject.onNext(Collections.emptyList());
+        viewModel.onShow();
+        testSubject.onNext(Collections.<Person>emptyList());
 
         // then
-        verify(mockObserver, times(1)).onPeopleListChanged();
+        verify(mockObserver, times(1)).onPeopleListChanged(ArgumentMatchers.<Person>anyList());
     }
 
     @Test
@@ -72,25 +73,25 @@ public class PersonListViewModelTest {
         // given
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
         PersonListViewModel.PeopleListObserver mockObserver = mock(PersonListViewModel.PeopleListObserver.class);
-        mViewModel.setListObserver(mockObserver);
+        viewModel.setListObserver(mockObserver);
 
         // when : first usage
-        mViewModel.onShow();
-        testSubject.onNext(Collections.emptyList());
-        mViewModel.onHide();
-        mViewModel.setListObserver(null);
+        viewModel.onShow();
+        testSubject.onNext(Collections.<Person>emptyList());
+        viewModel.onHide();
+        viewModel.setListObserver(null);
 
         // when : second usage
-        mViewModel.setListObserver(mockObserver);
-        mViewModel.onShow();
+        viewModel.setListObserver(mockObserver);
+        viewModel.onShow();
 
         // then
-        verify(mockObserver, times(2)).onPeopleListChanged();
+        verify(mockObserver, times(2)).onPeopleListChanged(ArgumentMatchers.<Person>anyList());
     }
 
     private Subject<List<Person>> configureRepositoryWithTestSubject() {
         Subject<List<Person>> testSubject = ReplaySubject.createWithSize(1);
-        when(mPersonRepository.peopleList()).thenReturn(testSubject);
+        when(peopleRepository.peopleList()).thenReturn(testSubject);
 
         return testSubject;
     }

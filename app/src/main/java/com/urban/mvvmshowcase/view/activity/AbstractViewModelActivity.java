@@ -1,48 +1,45 @@
 package com.urban.mvvmshowcase.view.activity;
 
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.urban.mvvmshowcase.viewmodel.ViewModel;
 
 public abstract class AbstractViewModelActivity<T extends ViewModel> extends AppCompatActivity {
-    private T mViewModel;
+    private T viewModel;
 
+    @NonNull
     protected abstract T createViewModel();
 
     protected T vm() {
-        return mViewModel;
+        return viewModel;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        configureViewModel();
-    }
-
-    private void configureViewModel() {
-        mViewModel = (T) getLastCustomNonConfigurationInstance();
-        if (mViewModel == null) {
-            mViewModel = createViewModel();
+        viewModel = (T) getLastCustomNonConfigurationInstance();
+        if (viewModel == null) {
+            viewModel = createViewModel();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mViewModel.onShow();
+        viewModel.onShow();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mViewModel.onHide();
+        viewModel.onHide();
     }
 
     @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return mViewModel;
+    public final Object onRetainCustomNonConfigurationInstance() {
+        return viewModel;
     }
 }

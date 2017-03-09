@@ -6,16 +6,17 @@ import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.model.repository.PersonRepository;
 
 public class PersonCreateViewModel implements ViewModel {
+    private final Navigator navigator;
+    private final PersonRepository peopleRepository;
+
+    // Bindables
     private String mPersonName;
     private int mPersonAge = 18;
 
-    private final Navigator mNavigator;
-    private final PersonRepository mPersonRepository;
-
     public PersonCreateViewModel(@NonNull Navigator navigator,
                                  @NonNull PersonRepository personRepository) {
-        mNavigator = navigator;
-        mPersonRepository = personRepository;
+        this.navigator = navigator;
+        peopleRepository = personRepository;
     }
 
     public String getPersonName() {
@@ -35,8 +36,8 @@ public class PersonCreateViewModel implements ViewModel {
     }
 
     public void onSavePerson() {
-        mPersonRepository.add(new Person(getPersonName(), getPersonAge()));
-        mNavigator.hide();
+        peopleRepository.add(new Person(getPersonName(), getPersonAge()));
+        navigator.hide();
     }
 
     @Override

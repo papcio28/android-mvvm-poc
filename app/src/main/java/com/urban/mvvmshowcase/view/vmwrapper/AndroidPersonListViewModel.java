@@ -6,7 +6,7 @@ import com.urban.mvvmshowcase.model.repository.PersonRepository;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 
 public class AndroidPersonListViewModel extends PersonListViewModel {
-    public final ObservableBoolean mLoading = new ObservableBoolean(true);
+    public final ObservableBoolean loadingObservable = new ObservableBoolean(true);
 
     public AndroidPersonListViewModel(PersonRepository personRepository) {
         super(personRepository);
@@ -14,11 +14,11 @@ public class AndroidPersonListViewModel extends PersonListViewModel {
 
     @Override
     public boolean isLoading() {
-        return mLoading.get();
+        return loadingObservable.get();
     }
 
     @Override
     public void setLoading(boolean loading) {
-        mLoading.set(loading);
+        this.loadingObservable.set(loading);
     }
 }

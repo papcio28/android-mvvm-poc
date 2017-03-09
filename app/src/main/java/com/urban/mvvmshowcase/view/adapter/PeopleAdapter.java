@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.StandardOneLineViewHolder> {
-    private List<Person> mPeople = Collections.emptyList();
+    private List<Person> people = Collections.emptyList();
 
     public void setPeople(List<Person> people) {
-        mPeople = people;
+        this.people = people;
         notifyDataSetChanged();
     }
 
@@ -26,14 +26,12 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.StandardOn
 
     @Override
     public void onBindViewHolder(StandardOneLineViewHolder holder, int position) {
-        Person person = mPeople.get(position);
-
-        holder.mTextLine.setText(person.toString());
+        holder.mTextLine.setText(people.get(position).toString());
     }
 
     @Override
     public int getItemCount() {
-        return mPeople.size();
+        return people.size();
     }
 
     static class StandardOneLineViewHolder extends RecyclerView.ViewHolder {

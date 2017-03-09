@@ -19,6 +19,7 @@ public class CreatePersonActivity extends AbstractViewModelActivity<AndroidPerso
         context.startActivity(new Intent(context, CreatePersonActivity.class));
     }
 
+    @NonNull
     @Override
     protected AndroidPersonCreateViewModel createViewModel() {
         return new AndroidPersonCreateViewModel(

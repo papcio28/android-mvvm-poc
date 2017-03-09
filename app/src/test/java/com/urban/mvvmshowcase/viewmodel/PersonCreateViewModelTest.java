@@ -18,14 +18,14 @@ public class PersonCreateViewModelTest {
     public static final String TEST_PERSON_NAME = "Test Person";
     public static final int TEST_PERSON_AGE = 27;
     @Mock
-    private PersonRepository mPersonRepository;
+    private PersonRepository peopleRepository;
     @Mock
-    private Navigator mNavigator;
-    private PersonCreateViewModel mViewModel;
+    private Navigator navigator;
+    private PersonCreateViewModel viewModel;
 
     @Before
     public void setUp() {
-        mViewModel = new PersonCreateViewModel(mNavigator, mPersonRepository);
+        viewModel = new PersonCreateViewModel(navigator, peopleRepository);
     }
 
     @Test
@@ -34,16 +34,16 @@ public class PersonCreateViewModelTest {
         setViewModelPersonParams();
 
         // when
-        mViewModel.onSavePerson();
+        viewModel.onSavePerson();
 
         // then
-        verify(mPersonRepository)
-                .add(personMatches(new Person(TEST_PERSON_NAME, TEST_PERSON_AGE, null)));
+        verify(peopleRepository)
+                .add(personMatches(new Person(TEST_PERSON_NAME, TEST_PERSON_AGE)));
     }
 
     private void setViewModelPersonParams() {
-        mViewModel.setPersonName(TEST_PERSON_NAME);
-        mViewModel.setPersonAge(TEST_PERSON_AGE);
+        viewModel.setPersonName(TEST_PERSON_NAME);
+        viewModel.setPersonAge(TEST_PERSON_AGE);
     }
 
     @Test
@@ -52,9 +52,9 @@ public class PersonCreateViewModelTest {
         setViewModelPersonParams();
 
         // when
-        mViewModel.onSavePerson();
+        viewModel.onSavePerson();
 
         // then
-        verify(mNavigator, times(1)).hide();
+        verify(navigator, times(1)).hide();
     }
 }

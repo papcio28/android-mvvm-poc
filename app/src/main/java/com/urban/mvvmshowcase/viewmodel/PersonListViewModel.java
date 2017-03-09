@@ -6,7 +6,6 @@ import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.model.repository.PersonRepository;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -14,38 +13,33 @@ import io.reactivex.functions.Consumer;
 
 public class PersonListViewModel implements ViewModel {
     // Bindables
-    private List<Person> mPeople = Collections.emptyList();
-    private boolean mLoading = true;
+    private boolean loading = true;
 
-    private PersonRepository mPersonRepository;
-    private Disposable mPeopleSubscription;
+    private PersonRepository peopleRepository;
+    private Disposable peopleSubscription;
 
-    private WeakReference<PeopleListObserver> mListObserver = new WeakReference<>(null);
+    private WeakReference<PeopleListObserver> dataObserver = new WeakReference<>(null);
 
     public PersonListViewModel(PersonRepository personRepository) {
-        mPersonRepository = personRepository;
+        peopleRepository = personRepository;
     }
 
     public void setListObserver(PeopleListObserver listObserver) {
-        mListObserver = new WeakReference<>(listObserver);
-    }
-
-    public List<Person> getPeople() {
-        return Collections.unmodifiableList(mPeople);
+        dataObserver = new WeakReference<>(listObserver);
     }
 
     public boolean isLoading() {
-        return mLoading;
+        return loading;
     }
 
     public void setLoading(boolean loading) {
-        mLoading = loading;
+        this.loading = loading;
     }
 
     @Override
     public void onShow() {
         setLoading(true);
-        mPeopleSubscription = mPersonRepository.peopleList()
+        peopleSubscription = peopleRepository.peopleList()
                 .subscribe(new Consumer<List<Person>>() {
                     @Override
                     public void accept(List<Person> people) throws Exception {
@@ -55,25 +49,24 @@ public class PersonListViewModel implements ViewModel {
     }
 
     private void stopPeopleLoading(@NonNull List<Person> people) {
-        mPeople = people;
-        notifyObserver();
+        notifyObserver(people);
         setLoading(false);
     }
 
-    private void notifyObserver() {
-        PeopleListObserver observer = mListObserver.get();
+    private void notifyObserver(List<Person> people) {
+        PeopleListObserver observer = dataObserver.get();
         if (observer != null) {
-            observer.onPeopleListChanged();
+            observer.onPeopleListChanged(people);
         }
     }
 
     @Override
     public void onHide() {
-        mPeopleSubscription.dispose();
-        mPeopleSubscription = null;
+        peopleSubscription.dispose();
+        peopleSubscription = null;
     }
 
     public interface PeopleListObserver {
-        void onPeopleListChanged();
+        void onPeopleListChanged(List<Person> people);
     }
 }

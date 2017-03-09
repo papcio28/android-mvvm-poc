@@ -2,7 +2,6 @@ package com.urban.mvvmshowcase.model.repository;
 
 import com.urban.mvvmshowcase.model.entity.Person;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -13,34 +12,34 @@ import io.reactivex.subjects.ReplaySubject;
 import io.reactivex.subjects.Subject;
 
 public class FakePersonRepository implements PersonRepository {
-    private final List<Person> mPeople = new LinkedList<>();
-    private final Subject<List<Person>> mPeopleSubject = ReplaySubject.createWithSize(1);
+    private final List<Person> people = new LinkedList<>();
+    private final Subject<List<Person>> peopleSubject = ReplaySubject.createWithSize(1);
 
     private FakePersonRepository() {
-        mPeople.add(new Person("Paweł Urban", 27));
+        people.add(new Person("Paweł Urban", 27));
         dispatchRefresh();
     }
 
-    private void dispatchRefresh() {
-        mPeopleSubject.onNext(mPeople);
+    public static FakePersonRepository create() {
+        return InstanceHolder.instance;
     }
 
-    public static FakePersonRepository create() {
-        return InstanceHolder.sInstance;
+    private void dispatchRefresh() {
+        peopleSubject.onNext(people);
     }
 
     @Override
     public Observable<List<Person>> peopleList() {
-        return mPeopleSubject;
+        return peopleSubject;
     }
 
     @Override
     public void add(Person person) {
-        mPeople.add(person);
+        people.add(person);
         dispatchRefresh();
     }
 
     private static final class InstanceHolder {
-        private static final FakePersonRepository sInstance = new FakePersonRepository();
+        private static final FakePersonRepository instance = new FakePersonRepository();
     }
 }
