@@ -14,7 +14,7 @@ public class PersonCreateViewModel implements ViewModel {
     public PersonCreateViewModel(@NonNull Navigator navigator,
                                  @NonNull PersonRepository personRepository) {
         this.navigator = navigator;
-        peopleRepository = personRepository;
+        this.peopleRepository = personRepository;
     }
 
     public Person getPerson() {

@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.urban.mvvmshowcase.R;
+import com.urban.mvvmshowcase.android.MvvmApplication;
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding;
 import com.urban.mvvmshowcase.model.entity.Person;
-import com.urban.mvvmshowcase.model.repository.FakePersonRepository;
 import com.urban.mvvmshowcase.view.adapter.PeopleAdapter;
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
@@ -24,7 +24,7 @@ public class MainActivity extends AbstractViewModelActivity<AndroidPersonListVie
     @NonNull
     @Override
     protected AndroidPersonListViewModel createViewModel() {
-        return new AndroidPersonListViewModel(FakePersonRepository.create());
+        return new AndroidPersonListViewModel(MvvmApplication.get(this).getPersonRepository());
     }
 
     @Override
