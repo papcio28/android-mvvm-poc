@@ -15,8 +15,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonCreateViewModelTest {
-    public static final String TEST_PERSON_NAME = "Test Person";
-    public static final int TEST_PERSON_AGE = 27;
+    private static final Person TEST_PERSON = new Person("Test Person", 27);
+
     @Mock
     private PersonRepository peopleRepository;
     @Mock
@@ -37,13 +37,11 @@ public class PersonCreateViewModelTest {
         viewModel.onSavePerson();
 
         // then
-        verify(peopleRepository)
-                .add(personMatches(new Person(TEST_PERSON_NAME, TEST_PERSON_AGE)));
+        verify(peopleRepository).add(personMatches(TEST_PERSON));
     }
 
     private void setViewModelPersonParams() {
-        viewModel.setPersonName(TEST_PERSON_NAME);
-        viewModel.setPersonAge(TEST_PERSON_AGE);
+        viewModel.setPerson(TEST_PERSON);
     }
 
     @Test

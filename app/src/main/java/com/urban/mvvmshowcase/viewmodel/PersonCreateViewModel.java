@@ -9,9 +9,7 @@ public class PersonCreateViewModel implements ViewModel {
     private final Navigator navigator;
     private final PersonRepository peopleRepository;
 
-    // Bindables
-    private String mPersonName;
-    private int mPersonAge = Person.DEFAULT_AGE;
+    private Person person = new Person("");
 
     public PersonCreateViewModel(@NonNull Navigator navigator,
                                  @NonNull PersonRepository personRepository) {
@@ -19,32 +17,26 @@ public class PersonCreateViewModel implements ViewModel {
         peopleRepository = personRepository;
     }
 
-    public String getPersonName() {
-        return mPersonName;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonName(String personName) {
-        mPersonName = personName;
-    }
-
-    public int getPersonAge() {
-        return mPersonAge;
-    }
-
-    public void setPersonAge(int personAge) {
-        mPersonAge = personAge;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public void onSavePerson() {
-        peopleRepository.add(new Person(getPersonName(), getPersonAge()));
+        peopleRepository.add(person);
         navigator.hide();
     }
 
     @Override
     public void onShow() {
+        // no-op
     }
 
     @Override
     public void onHide() {
+        // no-op
     }
 }

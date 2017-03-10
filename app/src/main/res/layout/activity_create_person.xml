@@ -21,7 +21,7 @@
             android:hint="Name"
             android:inputType="textPersonName"
             android:addTextChangedListener="@{vm.personNameWatcher}"
-            android:text="@{vm.personName}"/>
+            android:text="@{vm.person.name}"/>
 
         <EditText
             android:id="@+id/person_age"
@@ -30,7 +30,7 @@
             android:hint="Age"
             android:addTextChangedListener="@{vm.personAgeWatcher}"
             android:inputType="number"
-            android:text="@{``+vm.personAge}"/>
+            android:text="@{``+vm.person.age}"/>
 
         <Button
             android:id="@+id/person_save"

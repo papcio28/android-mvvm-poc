@@ -27,20 +27,15 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
     }
 
     @Bindable
-    public String getPersonName() {
-        return createViewModel.getPersonName();
-    }
-
-    @Bindable
-    public int getPersonAge() {
-        return createViewModel.getPersonAge();
+    public Person getPerson() {
+        return createViewModel.getPerson();
     }
 
     public TextWatcher getPersonNameWatcher() {
         return new DefaultTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                createViewModel.setPersonName(s.toString());
+                createViewModel.setPerson(getPerson().withName(s.toString()));
             }
         };
     }
@@ -49,7 +44,8 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
         return new DefaultTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                createViewModel.setPersonAge(s.length() == 0 ? 0 : Integer.parseInt(s.toString()));
+                createViewModel.setPerson(
+                        getPerson().withAge(s.length() == 0 ? 0 : Integer.parseInt(s.toString())));
             }
         };
     }
@@ -70,13 +66,13 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
 
     @Override
     public void onSaveState(Bundle state) {
-        state.putString(STATE_KEY_NAME, getPersonName());
-        state.putInt(STATE_KEY_AGE, getPersonAge());
+        state.putString(STATE_KEY_NAME, getPerson().getName());
+        state.putInt(STATE_KEY_AGE, getPerson().getAge());
     }
 
     @Override
     public void onRestoreState(Bundle state) {
-        createViewModel.setPersonName(state.getString(STATE_KEY_NAME, ""));
-        createViewModel.setPersonAge(state.getInt(STATE_KEY_AGE, Person.DEFAULT_AGE));
+        createViewModel.setPerson(new Person(state.getString(STATE_KEY_NAME, ""),
+                state.getInt(STATE_KEY_AGE, Person.DEFAULT_AGE)));
     }
 }
