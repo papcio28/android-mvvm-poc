@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.view.activity;
+package com.urban.mvvmshowcase.view.activity.base;
 
 import android.support.annotation.NonNull;
 

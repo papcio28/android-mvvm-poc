@@ -3,7 +3,7 @@ package com.urban.mvvmshowcase.view.utility;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-public class DefaultTextWatcher implements TextWatcher {
+public abstract class DefaultTextWatcher implements TextWatcher {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import com.urban.mvvmshowcase.R;
 import com.urban.mvvmshowcase.android.MvvmApplication;
 import com.urban.mvvmshowcase.databinding.ActivityCreatePersonBinding;
+import com.urban.mvvmshowcase.view.activity.base.AbstractSavingStateViewModelActivity;
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonCreateViewModel;
 import com.urban.mvvmshowcase.viewmodel.Navigator;
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel;

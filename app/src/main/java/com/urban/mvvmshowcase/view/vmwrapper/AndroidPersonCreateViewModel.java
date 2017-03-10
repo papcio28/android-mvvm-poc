@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -11,9 +12,13 @@ import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.view.utility.DefaultTextWatcher;
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel;
 
+import static android.support.annotation.VisibleForTesting.PRIVATE;
+
 public class AndroidPersonCreateViewModel extends BaseObservable implements SavingStateViewModel {
-    private static final String STATE_KEY_NAME = "name";
-    private static final String STATE_KEY_AGE = "age";
+    @VisibleForTesting(otherwise = PRIVATE)
+    static final String STATE_KEY_NAME = "name";
+    @VisibleForTesting(otherwise = PRIVATE)
+    static final String STATE_KEY_AGE = "age";
 
     private final PersonCreateViewModel createViewModel;
 

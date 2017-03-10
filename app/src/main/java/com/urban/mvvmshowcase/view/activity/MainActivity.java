@@ -11,6 +11,7 @@ import com.urban.mvvmshowcase.R;
 import com.urban.mvvmshowcase.android.MvvmApplication;
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding;
 import com.urban.mvvmshowcase.model.entity.Person;
+import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity;
 import com.urban.mvvmshowcase.view.adapter.PeopleAdapter;
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
