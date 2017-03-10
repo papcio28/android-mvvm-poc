@@ -18,7 +18,6 @@ import io.reactivex.subjects.Subject;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -69,7 +68,7 @@ public class PersonListViewModelTest {
     }
 
     @Test
-    public void shouldReceiveLatesListWhenReused() {
+    public void shouldReceiveLatestListWhenReused() {
         // given
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
         PersonListViewModel.PeopleListObserver mockObserver = mock(PersonListViewModel.PeopleListObserver.class);

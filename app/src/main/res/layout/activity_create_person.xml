@@ -18,7 +18,7 @@
             android:id="@+id/person_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textPersonName"
             android:addTextChangedListener="@{vm.personNameWatcher}"
             android:text="@{vm.person.name}"/>
@@ -27,7 +27,7 @@
             android:id="@+id/person_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"
+            android:hint="@string/age"
             android:addTextChangedListener="@{vm.personAgeWatcher}"
             android:inputType="number"
             android:text="@{``+vm.person.age}"/>
@@ -37,6 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{(v) -> vm.onPersonSave()}"
-            android:text="Save"/>
+            android:text="@string/save"/>
     </LinearLayout>
 </layout>

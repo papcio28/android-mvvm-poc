@@ -35,7 +35,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.StandardOn
     }
 
     static class StandardOneLineViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextLine;
+        private final TextView mTextLine;
 
         private StandardOneLineViewHolder(@NonNull ViewGroup container) {
             super(LayoutInflater.from(container.getContext())

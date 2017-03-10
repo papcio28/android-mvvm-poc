@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static com.urban.mvvmshowcase.matcher.PersonArgumentMatcher.personMatches;
+import static com.urban.mvvmshowcase.utility.matcher.PersonArgumentMatcher.personMatches;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 

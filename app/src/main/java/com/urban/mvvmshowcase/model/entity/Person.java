@@ -2,14 +2,14 @@ package com.urban.mvvmshowcase.model.entity;
 
 import java.util.Locale;
 
-public class Person {
+public final class Person {
     public static final int DEFAULT_AGE = 18;
 
     private final String name;
     private final int age;
 
-    public Person(String name) {
-        this.name = name;
+    public Person() {
+        this.name = "";
         this.age = DEFAULT_AGE;
     }
 

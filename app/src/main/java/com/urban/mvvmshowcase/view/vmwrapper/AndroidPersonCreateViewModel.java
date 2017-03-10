@@ -17,13 +17,13 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
 
     private final PersonCreateViewModel createViewModel;
 
+    public AndroidPersonCreateViewModel(PersonCreateViewModel personCreateViewModel) {
+        createViewModel = personCreateViewModel;
+    }
+
     @BindingAdapter("android:onClick")
     public static void setOnClickListener(View view, View.OnClickListener listener) {
         view.setOnClickListener(listener);
-    }
-
-    public AndroidPersonCreateViewModel(PersonCreateViewModel personCreateViewModel) {
-        createViewModel = personCreateViewModel;
     }
 
     @Bindable

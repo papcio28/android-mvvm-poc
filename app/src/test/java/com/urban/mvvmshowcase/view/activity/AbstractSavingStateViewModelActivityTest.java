@@ -1,6 +1,7 @@
 package com.urban.mvvmshowcase.view.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.urban.mvvmshowcase.BuildConfig;
 import com.urban.mvvmshowcase.utility.ActivityUtil;
@@ -58,5 +59,20 @@ public class AbstractSavingStateViewModelActivityTest {
 
         // assert
         verify(viewModel, times(1)).onRestoreState(any(Bundle.class));
+    }
+
+    private static class TestSavingStateViewModelActivity
+            extends AbstractSavingStateViewModelActivity<SavingStateViewModel> {
+        private SavingStateViewModel viewModel;
+
+        void setTestViewModel(SavingStateViewModel viewModel) {
+            this.viewModel = viewModel;
+        }
+
+        @NonNull
+        @Override
+        protected SavingStateViewModel createViewModel() {
+            return viewModel;
+        }
     }
 }

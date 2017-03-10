@@ -9,7 +9,7 @@ public class PersonCreateViewModel implements ViewModel {
     private final Navigator navigator;
     private final PersonRepository peopleRepository;
 
-    private Person person = new Person("");
+    private Person person = new Person();
 
     public PersonCreateViewModel(@NonNull Navigator navigator,
                                  @NonNull PersonRepository personRepository) {

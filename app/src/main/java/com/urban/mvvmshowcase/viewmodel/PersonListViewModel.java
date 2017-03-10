@@ -12,12 +12,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class PersonListViewModel implements ViewModel {
-    // Bindables
-    private boolean loading = true;
-
-    private PersonRepository peopleRepository;
+    private final PersonRepository peopleRepository;
     private Disposable peopleSubscription;
 
+    private boolean loading = true;
     private WeakReference<PeopleListObserver> dataObserver = new WeakReference<>(null);
 
     public PersonListViewModel(PersonRepository personRepository) {
@@ -32,7 +30,7 @@ public class PersonListViewModel implements ViewModel {
         return loading;
     }
 
-    public void setLoading(boolean loading) {
+    protected void setLoading(boolean loading) {
         this.loading = loading;
     }
 

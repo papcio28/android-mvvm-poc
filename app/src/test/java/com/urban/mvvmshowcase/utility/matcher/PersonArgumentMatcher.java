@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.matcher;
+package com.urban.mvvmshowcase.utility.matcher;
 
 import com.urban.mvvmshowcase.model.entity.Person;
 
@@ -11,12 +11,12 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class PersonArgumentMatcher implements ArgumentMatcher<Person> {
     private final Person expected;
 
-    public static Person personMatches(Person person) {
-        return argThat(new PersonArgumentMatcher(person));
-    }
-
     private PersonArgumentMatcher(Person expected) {
         this.expected = expected;
+    }
+
+    public static Person personMatches(Person person) {
+        return argThat(new PersonArgumentMatcher(person));
     }
 
     @Override
