@@ -12,18 +12,24 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class PersonListViewModel implements ViewModel {
+    private final PersonListNavigator navigator;
     private final PersonRepository peopleRepository;
     private Disposable peopleSubscription;
 
     private boolean loading = true;
     private WeakReference<PeopleListObserver> dataObserver = new WeakReference<>(null);
 
-    public PersonListViewModel(PersonRepository personRepository) {
-        peopleRepository = personRepository;
+    public PersonListViewModel(PersonRepository personRepository, PersonListNavigator navigator) {
+        this.peopleRepository = personRepository;
+        this.navigator = navigator;
     }
 
     public void setListObserver(PeopleListObserver listObserver) {
         dataObserver = new WeakReference<>(listObserver);
+    }
+
+    public void openCreatePersonScreen() {
+        navigator.openCreatePersonScreen();
     }
 
     public boolean isLoading() {
@@ -66,5 +72,9 @@ public class PersonListViewModel implements ViewModel {
 
     public interface PeopleListObserver {
         void onPeopleListChanged(List<Person> people);
+    }
+
+    public interface PersonListNavigator {
+        void openCreatePersonScreen();
     }
 }

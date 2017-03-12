@@ -8,8 +8,8 @@ import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 public class AndroidPersonListViewModel extends PersonListViewModel {
     public final ObservableBoolean loadingObservable = new ObservableBoolean(true);
 
-    public AndroidPersonListViewModel(PersonRepository personRepository) {
-        super(personRepository);
+    public AndroidPersonListViewModel(PersonRepository personRepository, PersonListNavigator navigator) {
+        super(personRepository, navigator);
     }
 
     @Override

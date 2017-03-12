@@ -19,13 +19,14 @@ import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 import java.util.List;
 
 public class MainActivity extends AbstractViewModelActivity<AndroidPersonListViewModel>
-        implements PersonListViewModel.PeopleListObserver {
+        implements PersonListViewModel.PeopleListObserver,
+        PersonListViewModel.PersonListNavigator {
     private PeopleAdapter peopleAdapter;
 
     @NonNull
     @Override
     protected AndroidPersonListViewModel createViewModel() {
-        return new AndroidPersonListViewModel(MvvmApplication.get(this).getPersonRepository());
+        return new AndroidPersonListViewModel(MvvmApplication.get(this).getPersonRepository(), this);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MainActivity extends AbstractViewModelActivity<AndroidPersonListVie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_save) {
-            CreatePersonActivity.start(this);
+            vm().openCreatePersonScreen();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -64,5 +65,10 @@ public class MainActivity extends AbstractViewModelActivity<AndroidPersonListVie
     @Override
     public void onPeopleListChanged(List<Person> people) {
         peopleAdapter.setPeople(people);
+    }
+
+    @Override
+    public void openCreatePersonScreen() {
+        CreatePersonActivity.start(this);
     }
 }
