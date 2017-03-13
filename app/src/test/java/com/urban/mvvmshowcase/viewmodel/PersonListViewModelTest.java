@@ -18,6 +18,7 @@ import io.reactivex.subjects.Subject;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,13 +26,17 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonListViewModelTest {
+    private static final Person TEST_PERSON = new Person("Test Person", 27);
+
     @Mock
     private PersonRepository peopleRepository;
+    @Mock
+    private PersonListViewModel.PersonListNavigator navigator;
     private PersonListViewModel viewModel;
 
     @Before
     public void setUp() {
-        viewModel = new PersonListViewModel(peopleRepository);
+        viewModel = new PersonListViewModel(peopleRepository, navigator);
     }
 
     @Test
@@ -86,6 +91,24 @@ public class PersonListViewModelTest {
 
         // then
         verify(mockObserver, times(2)).onPeopleListChanged(ArgumentMatchers.<Person>anyList());
+    }
+
+    @Test
+    public void shouldUseNavigatorToOpenCreateScreen() {
+        // when
+        viewModel.openCreatePersonScreen();
+
+        // then
+        verify(navigator, times(1)).openCreatePersonScreen();
+    }
+
+    @Test
+    public void shouldUseNavigatorToOpenEditScreen() {
+        // when
+        viewModel.openEditPersonScreen(TEST_PERSON);
+
+        // then
+        verify(navigator, times(1)).openEditPersonScreen(eq(TEST_PERSON));
     }
 
     private Subject<List<Person>> configureRepositoryWithTestSubject() {

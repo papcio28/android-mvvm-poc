@@ -1,9 +1,12 @@
 package com.urban.mvvmshowcase.model.repository;
 
+import android.support.annotation.Nullable;
+
 import com.urban.mvvmshowcase.model.entity.Person;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.ReplaySubject;
@@ -32,9 +35,24 @@ public class FakePersonRepository implements PersonRepository {
     }
 
     @Override
-    public void add(Person person) {
-        people.add(person);
+    public void save(Person person) {
+        if (people.contains(person)) {
+            people.set(people.indexOf(person), person);
+        } else {
+            people.add(person);
+        }
         dispatchRefresh();
+    }
+
+    @Nullable
+    @Override
+    public Person get(UUID personId) {
+        for (Person person : people) {
+            if (person.getId().equals(personId)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     private static final class InstanceHolder {

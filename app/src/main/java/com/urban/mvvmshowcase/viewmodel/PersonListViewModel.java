@@ -32,6 +32,10 @@ public class PersonListViewModel implements ViewModel {
         navigator.openCreatePersonScreen();
     }
 
+    public void openEditPersonScreen(Person person) {
+        navigator.openEditPersonScreen(person);
+    }
+
     public boolean isLoading() {
         return loading;
     }
@@ -76,5 +80,7 @@ public class PersonListViewModel implements ViewModel {
 
     public interface PersonListNavigator {
         void openCreatePersonScreen();
+
+        void openEditPersonScreen(Person person);
     }
 }

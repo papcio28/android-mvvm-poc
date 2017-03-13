@@ -1,6 +1,7 @@
 package com.urban.mvvmshowcase.viewmodel;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.model.repository.PersonRepository;
@@ -21,12 +22,14 @@ public class PersonCreateViewModel implements ViewModel {
         return person;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(@Nullable Person person) {
+        if (person != null) {
+            this.person = person;
+        }
     }
 
     public void onSavePerson() {
-        peopleRepository.add(person);
+        peopleRepository.save(person);
         navigator.hide();
     }
 

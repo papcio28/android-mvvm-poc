@@ -37,7 +37,7 @@ public class PersonCreateViewModelTest {
         viewModel.onSavePerson();
 
         // then
-        verify(peopleRepository).add(personMatches(TEST_PERSON));
+        verify(peopleRepository).save(personMatches(TEST_PERSON));
     }
 
     private void setViewModelPersonParams() {

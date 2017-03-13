@@ -23,6 +23,7 @@ import static com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonCreateViewModel
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -66,6 +67,15 @@ public class AndroidPersonCreateViewModelTest {
     @Test
     public void shouldReturnExactSamePersonAsBaseViewModel() {
         assertTrue(androidViewModel.getPerson() == TEST_PERSON);
+    }
+
+    @Test
+    public void shouldSetNewPersonToBaseViewModel() {
+        // when
+        androidViewModel.setPerson(TEST_PERSON);
+
+        // then
+        verify(basicViewModel, times(1)).setPerson(eq(TEST_PERSON));
     }
 
     @Test

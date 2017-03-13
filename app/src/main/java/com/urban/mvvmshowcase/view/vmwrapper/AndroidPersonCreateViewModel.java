@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextWatcher;
 import android.view.View;
@@ -34,6 +35,10 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
     @Bindable
     public Person getPerson() {
         return createViewModel.getPerson();
+    }
+
+    public void setPerson(@Nullable Person person) {
+        createViewModel.setPerson(person);
     }
 
     public TextWatcher getPersonNameWatcher() {

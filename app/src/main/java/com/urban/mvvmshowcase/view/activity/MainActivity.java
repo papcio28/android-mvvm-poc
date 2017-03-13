@@ -20,7 +20,8 @@ import java.util.List;
 
 public class MainActivity extends AbstractViewModelActivity<AndroidPersonListViewModel>
         implements PersonListViewModel.PeopleListObserver,
-        PersonListViewModel.PersonListNavigator {
+        PersonListViewModel.PersonListNavigator,
+        PeopleAdapter.ClickListener {
     private PeopleAdapter peopleAdapter;
 
     @NonNull
@@ -38,7 +39,7 @@ public class MainActivity extends AbstractViewModelActivity<AndroidPersonListVie
     }
 
     private void configureListAdapter(ActivityMainBinding viewBinding) {
-        peopleAdapter = new PeopleAdapter();
+        peopleAdapter = new PeopleAdapter(this);
         viewBinding.peopleList.setLayoutManager(new LinearLayoutManager(this));
         viewBinding.peopleList.setAdapter(peopleAdapter);
     }
@@ -70,5 +71,15 @@ public class MainActivity extends AbstractViewModelActivity<AndroidPersonListVie
     @Override
     public void openCreatePersonScreen() {
         CreatePersonActivity.start(this);
+    }
+
+    @Override
+    public void openEditPersonScreen(Person person) {
+        CreatePersonActivity.startEdit(this, person);
+    }
+
+    @Override
+    public void onPersonClick(Person person) {
+        vm().openEditPersonScreen(person);
     }
 }
