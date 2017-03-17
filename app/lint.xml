@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="Registered" severity="ignore">
+        <ignore path="src/test/java/**"/>
+    </issue>
+    <issue id="GoogleAppIndexingWarning" severity="ignore"/>
+    <issue id="AllowBackup" severity="ignore"/>
+    <issue id="AndroidUnknownAttribute" severity="ignore">
+        <ignore path="src/main/res/layout/**"/>
+    </issue>
+</lint>

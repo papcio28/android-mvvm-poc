@@ -17,6 +17,7 @@ public abstract class AbstractViewModelActivity<T extends ViewModel> extends App
         return viewModel;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
