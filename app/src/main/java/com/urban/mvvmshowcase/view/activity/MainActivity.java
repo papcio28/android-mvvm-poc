@@ -14,13 +14,14 @@ import com.urban.mvvmshowcase.model.entity.Person;
 import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity;
 import com.urban.mvvmshowcase.view.adapter.PeopleAdapter;
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel;
-import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
+import com.urban.mvvmshowcase.viewmodel.PeopleListObserver;
+import com.urban.mvvmshowcase.viewmodel.PersonListNavigator;
 
 import java.util.List;
 
 public class MainActivity extends AbstractViewModelActivity<AndroidPersonListViewModel>
-        implements PersonListViewModel.PeopleListObserver,
-        PersonListViewModel.PersonListNavigator,
+        implements PeopleListObserver,
+        PersonListNavigator,
         PeopleAdapter.ClickListener {
     private PeopleAdapter peopleAdapter;
 

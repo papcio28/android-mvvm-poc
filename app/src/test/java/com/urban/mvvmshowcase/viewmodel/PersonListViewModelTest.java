@@ -31,7 +31,7 @@ public class PersonListViewModelTest {
     @Mock
     private PersonRepository peopleRepository;
     @Mock
-    private PersonListViewModel.PersonListNavigator navigator;
+    private PersonListNavigator navigator;
     private PersonListViewModel viewModel;
 
     @Before
@@ -41,7 +41,7 @@ public class PersonListViewModelTest {
 
     @Test
     public void shouldLoadOnFirstShow() {
-        assertTrue(viewModel.isLoading());
+        assertTrue(viewModel.getLoading());
     }
 
     @Test
@@ -54,14 +54,14 @@ public class PersonListViewModelTest {
         testSubject.onNext(Collections.<Person>emptyList());
 
         // then
-        assertFalse(viewModel.isLoading());
+        assertFalse(viewModel.getLoading());
     }
 
     @Test
     public void shouldNotifyObserverAboutListChange() {
         // given
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
-        PersonListViewModel.PeopleListObserver mockObserver = mock(PersonListViewModel.PeopleListObserver.class);
+        PeopleListObserver mockObserver = mock(PeopleListObserver.class);
         viewModel.setListObserver(mockObserver);
 
         // when
@@ -76,7 +76,7 @@ public class PersonListViewModelTest {
     public void shouldReceiveLatestListWhenReused() {
         // given
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
-        PersonListViewModel.PeopleListObserver mockObserver = mock(PersonListViewModel.PeopleListObserver.class);
+        PeopleListObserver mockObserver = mock(PeopleListObserver.class);
         viewModel.setListObserver(mockObserver);
 
         // when : first usage

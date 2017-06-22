@@ -3,6 +3,7 @@ package com.urban.mvvmshowcase.view.vmwrapper;
 import android.databinding.ObservableBoolean;
 
 import com.urban.mvvmshowcase.model.repository.PersonRepository;
+import com.urban.mvvmshowcase.viewmodel.PersonListNavigator;
 import com.urban.mvvmshowcase.viewmodel.PersonListViewModel;
 
 public class AndroidPersonListViewModel extends PersonListViewModel {
@@ -14,7 +15,7 @@ public class AndroidPersonListViewModel extends PersonListViewModel {
     }
 
     @Override
-    public boolean isLoading() {
+    public boolean getLoading() {
         return loadingObservable.get();
     }
 
