@@ -14,4 +14,6 @@ data class Person(val id: UUID = UUID.randomUUID(),
 
     fun withName(name: String) = copy(id, name, age)
     fun withAge(age: Int) = copy(id, name, age)
+
+    override fun toString() = "$name [$age]"
 }
