@@ -10,13 +10,14 @@ import com.urban.mvvmshowcase.android.MvvmApplication
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding
 import com.urban.mvvmshowcase.model.entity.Person
 import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity
+import com.urban.mvvmshowcase.view.adapter.ClickListener
 import com.urban.mvvmshowcase.view.adapter.PeopleAdapter
 import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel
 import com.urban.mvvmshowcase.viewmodel.PeopleListObserver
 import com.urban.mvvmshowcase.viewmodel.PersonListNavigator
 
 class MainActivity : AbstractViewModelActivity<AndroidPersonListViewModel>(),
-        PeopleListObserver, PersonListNavigator, PeopleAdapter.ClickListener {
+        PeopleListObserver, PersonListNavigator, ClickListener {
     private var peopleAdapter = PeopleAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,5 +58,7 @@ class MainActivity : AbstractViewModelActivity<AndroidPersonListViewModel>(),
     override fun createViewModel(): AndroidPersonListViewModel =
             AndroidPersonListViewModel(MvvmApplication.get(this).personRepository, this)
 
-    override fun onPeopleListChanged(people: List<Person>) = peopleAdapter.setPeople(people)
+    override fun onPeopleListChanged(people: List<Person>) {
+        peopleAdapter.people = people
+    }
 }
