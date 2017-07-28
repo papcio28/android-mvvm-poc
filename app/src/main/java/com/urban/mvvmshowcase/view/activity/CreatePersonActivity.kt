@@ -41,7 +41,8 @@ class CreatePersonActivity : AbstractSavingStateViewModelActivity<AndroidPersonC
         personRepository = MvvmApplication.get(this).personRepository
 
         super.onCreate(savedInstanceState)
-        val viewBinding = DataBindingUtil.setContentView<ActivityCreatePersonBinding>(this, R.layout.activity_create_person)
+        val viewBinding: ActivityCreatePersonBinding =
+                DataBindingUtil.setContentView(this, R.layout.activity_create_person)
         viewBinding.vm = vm()
 
         if (wasLaunchedWithPersonId()) {
@@ -49,13 +50,9 @@ class CreatePersonActivity : AbstractSavingStateViewModelActivity<AndroidPersonC
         }
     }
 
-    private fun getEditPersonId(): UUID {
-        return intent.getSerializableExtra(EXTRA_ID) as UUID
-    }
+    private fun getEditPersonId() = intent.getSerializableExtra(EXTRA_ID) as UUID
 
-    private fun wasLaunchedWithPersonId(): Boolean {
-        return intent.hasExtra(EXTRA_ID)
-    }
+    private fun wasLaunchedWithPersonId() = intent.hasExtra(EXTRA_ID)
 
     override fun hide() = finish()
 
