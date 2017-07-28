@@ -10,7 +10,7 @@ object FakePersonRepository : PersonRepository {
     private val peopleSubject = ReplaySubject.createWithSize<List<Person>>(1)
 
     init {
-        people.add(Person("Paweł Urban", 27))
+        people.add(Person(name = "Paweł Urban", age = 27))
         dispatchRefresh()
     }
 
