@@ -23,7 +23,7 @@ open class PersonListViewModel(private val personRepository: PersonRepository,
     private var dataObserver: WeakReference<PeopleListObserver?> =
             WeakReference<PeopleListObserver?>(null)
 
-    fun setListObserver(observer: PeopleListObserver) {
+    fun setListObserver(observer: PeopleListObserver?) {
         dataObserver = WeakReference(observer)
     }
 
