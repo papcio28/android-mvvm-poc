@@ -2,12 +2,12 @@ package com.urban.mvvmshowcase.model.repository
 
 import com.urban.mvvmshowcase.model.entity.Person
 import io.reactivex.Observable
-import io.reactivex.subjects.ReplaySubject
+import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 object FakePersonRepository : PersonRepository {
     private val people = mutableListOf<Person>()
-    private val peopleSubject = ReplaySubject.createWithSize<List<Person>>(1)
+    private val peopleSubject = BehaviorSubject.createDefault<List<Person>>(emptyList())
 
     init {
         people.add(Person(name = "Paweł Urban", age = 27))
