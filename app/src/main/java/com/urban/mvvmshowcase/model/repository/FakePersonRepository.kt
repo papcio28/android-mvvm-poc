@@ -19,8 +19,9 @@ object FakePersonRepository : PersonRepository {
     }
 
     override fun save(person: Person) {
-        if (people.contains(person)) {
-            people.set(people.indexOf(person), person)
+        val index = people.indexOfFirst { it.id == person.id }
+        if (index != -1) {
+            people.set(index, person)
         } else {
             people.add(person)
         }
