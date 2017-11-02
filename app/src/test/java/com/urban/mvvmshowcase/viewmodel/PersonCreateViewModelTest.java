@@ -31,28 +31,13 @@ public class PersonCreateViewModelTest {
     @Test
     public void shouldPersistPersonInRepository() {
         // given
-        setViewModelPersonParams();
+        viewModel.setPerson(TEST_PERSON);
 
         // when
         viewModel.savePerson();
 
         // then
         verify(peopleRepository).save(personMatches(TEST_PERSON));
-    }
-
-    private void setViewModelPersonParams() {
-        viewModel.setPerson(TEST_PERSON);
-    }
-
-    @Test
-    public void shouldHideViewModelAfterSave() {
-        // given
-        setViewModelPersonParams();
-
-        // when
-        viewModel.savePerson();
-
-        // then
         verify(viewAccess, times(1)).hide();
     }
 }

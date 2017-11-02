@@ -13,7 +13,7 @@ public class PersonTest {
 
     @Test
     public void shouldHaveDefaultAgeSet() {
-        assertEquals(new Person().getAge(), Person.DEFAULT_AGE);
+        assertEquals(new Person().getAge(), 18);
     }
 
     @Test

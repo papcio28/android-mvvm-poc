@@ -3,10 +3,12 @@ package com.urban.mvvmshowcase.utility;
 import android.app.Activity;
 import android.os.Bundle;
 
+import org.junit.AssumptionViolatedException;
 import org.robolectric.android.controller.ActivityController;
 
 public final class ActivityUtil {
     private ActivityUtil() {
+        throw new AssertionError("No instance");
     }
 
     public static <T extends Activity> ActivityController<T> freshActivityStart(
