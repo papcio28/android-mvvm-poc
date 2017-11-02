@@ -20,12 +20,12 @@ public class PersonCreateViewModelTest {
     @Mock
     private PersonRepository peopleRepository;
     @Mock
-    private Navigator navigator;
+    private PersonCreateViewAccess viewAccess;
     private PersonCreateViewModel viewModel;
 
     @Before
     public void setUp() {
-        viewModel = new PersonCreateViewModel(navigator, peopleRepository);
+        viewModel = new PersonCreateViewModel(peopleRepository, viewAccess);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class PersonCreateViewModelTest {
         setViewModelPersonParams();
 
         // when
-        viewModel.onSavePerson();
+        viewModel.savePerson();
 
         // then
         verify(peopleRepository).save(personMatches(TEST_PERSON));
@@ -50,9 +50,9 @@ public class PersonCreateViewModelTest {
         setViewModelPersonParams();
 
         // when
-        viewModel.onSavePerson();
+        viewModel.savePerson();
 
         // then
-        verify(navigator, times(1)).hide();
+        verify(viewAccess, times(1)).hide();
     }
 }

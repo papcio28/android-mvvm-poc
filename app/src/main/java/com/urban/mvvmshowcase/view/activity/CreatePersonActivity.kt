@@ -9,14 +9,13 @@ import com.urban.mvvmshowcase.android.MvvmApplication
 import com.urban.mvvmshowcase.databinding.ActivityCreatePersonBinding
 import com.urban.mvvmshowcase.model.entity.Person
 import com.urban.mvvmshowcase.model.repository.PersonRepository
-import com.urban.mvvmshowcase.view.activity.base.AbstractSavingStateViewModelActivity
-import com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonCreateViewModel
-import com.urban.mvvmshowcase.viewmodel.Navigator
+import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity
+import com.urban.mvvmshowcase.viewmodel.PersonCreateViewAccess
 import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel
 import java.util.*
 
-class CreatePersonActivity : AbstractSavingStateViewModelActivity<AndroidPersonCreateViewModel>(),
-        Navigator {
+class CreatePersonActivity : AbstractViewModelActivity<PersonCreateViewModel>(),
+        PersonCreateViewAccess {
     private lateinit var personRepository: PersonRepository
 
     companion object {
@@ -46,7 +45,9 @@ class CreatePersonActivity : AbstractSavingStateViewModelActivity<AndroidPersonC
         viewBinding.vm = vm()
 
         if (wasLaunchedWithPersonId()) {
-            vm().person = personRepository.get(getEditPersonId())
+            personRepository.get(getEditPersonId())?.let {
+                vm().person = it
+            }
         }
     }
 
@@ -56,6 +57,6 @@ class CreatePersonActivity : AbstractSavingStateViewModelActivity<AndroidPersonC
 
     override fun hide() = finish()
 
-    override fun createViewModel(): AndroidPersonCreateViewModel = AndroidPersonCreateViewModel(
-            PersonCreateViewModel(this, personRepository))
+    override fun createViewModel(): PersonCreateViewModel =
+            PersonCreateViewModel(personRepository, this)
 }
