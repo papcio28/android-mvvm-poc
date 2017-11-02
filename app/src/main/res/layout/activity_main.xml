@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.urban.mvvmshowcase.viewmodel.PersonListViewModel"/>
+            type="com.urban.mvvmshowcase.person.list.PersonListViewModel"/>
 
         <variable
             name="view"
-            type="com.urban.mvvmshowcase.view.activity.MainActivity"/>
+            type="com.urban.mvvmshowcase.person.list.MainActivity"/>
 
         <import type="android.view.View"/>
     </data>

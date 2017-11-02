@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.model.entity
+package com.urban.mvvmshowcase.person
 
 import java.util.*
 

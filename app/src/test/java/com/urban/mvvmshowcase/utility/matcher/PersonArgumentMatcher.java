@@ -1,6 +1,6 @@
 package com.urban.mvvmshowcase.utility.matcher;
 
-import com.urban.mvvmshowcase.model.entity.Person;
+import com.urban.mvvmshowcase.person.Person;
 
 import org.mockito.ArgumentMatcher;
 

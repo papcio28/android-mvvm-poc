@@ -1,11 +1,11 @@
-package com.urban.mvvmshowcase.view.adapter
+package com.urban.mvvmshowcase.person.list.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.urban.mvvmshowcase.model.entity.Person
+import com.urban.mvvmshowcase.person.Person
 
 class StandardOneLineViewHolder(container: ViewGroup, private val clickListener: ClickListener) :
         RecyclerView.ViewHolder(LayoutInflater.from(container.context)

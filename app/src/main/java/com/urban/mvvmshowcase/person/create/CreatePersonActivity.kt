@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.view.activity
+package com.urban.mvvmshowcase.person.create
 
 import android.content.Context
 import android.content.Intent
@@ -7,11 +7,9 @@ import android.os.Bundle
 import com.urban.mvvmshowcase.R
 import com.urban.mvvmshowcase.android.MvvmApplication
 import com.urban.mvvmshowcase.databinding.ActivityCreatePersonBinding
-import com.urban.mvvmshowcase.model.entity.Person
-import com.urban.mvvmshowcase.model.repository.PersonRepository
-import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity
-import com.urban.mvvmshowcase.viewmodel.PersonCreateViewAccess
-import com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel
+import com.urban.mvvmshowcase.person.Person
+import com.urban.mvvmshowcase.person.PersonRepository
+import com.urban.mvvmshowcase.android.base.AbstractViewModelActivity
 import java.util.*
 
 class CreatePersonActivity : AbstractViewModelActivity<PersonCreateViewModel>(),

@@ -1,10 +1,9 @@
-package com.urban.mvvmshowcase.view.activity.base
+package com.urban.mvvmshowcase.android.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.urban.mvvmshowcase.viewmodel.ViewModel
 
-abstract class AbstractViewModelActivity<out T : ViewModel> : AppCompatActivity() {
+abstract class AbstractViewModelActivity<T : Any> : AppCompatActivity() {
     private lateinit var viewModel: T
 
     protected abstract fun createViewModel(): T

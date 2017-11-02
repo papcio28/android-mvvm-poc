@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.view.utility
+package com.urban.mvvmshowcase.android.util
 
 import android.databinding.BindingAdapter
 import android.view.View

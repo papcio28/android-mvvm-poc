@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.viewmodel
+package com.urban.mvvmshowcase.person.create
 
 interface PersonCreateViewAccess {
     fun hide()

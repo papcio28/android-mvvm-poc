@@ -1,8 +1,8 @@
-package com.urban.mvvmshowcase.view.adapter
+package com.urban.mvvmshowcase.person.list.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.urban.mvvmshowcase.model.entity.Person
+import com.urban.mvvmshowcase.person.Person
 
 class PeopleAdapter(val clickListener: ClickListener, val people: List<Person>) :
         RecyclerView.Adapter<StandardOneLineViewHolder>() {

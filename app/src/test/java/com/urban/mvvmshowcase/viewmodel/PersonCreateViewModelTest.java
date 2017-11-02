@@ -1,7 +1,9 @@
 package com.urban.mvvmshowcase.viewmodel;
 
-import com.urban.mvvmshowcase.model.entity.Person;
-import com.urban.mvvmshowcase.model.repository.PersonRepository;
+import com.urban.mvvmshowcase.person.Person;
+import com.urban.mvvmshowcase.person.PersonRepository;
+import com.urban.mvvmshowcase.person.create.PersonCreateViewAccess;
+import com.urban.mvvmshowcase.person.create.PersonCreateViewModel;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,5 @@
-package com.urban.mvvmshowcase.model.repository
+package com.urban.mvvmshowcase.person
 
-import com.urban.mvvmshowcase.model.entity.Person
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import java.util.*
@@ -11,6 +10,7 @@ object FakePersonRepository : PersonRepository {
 
     init {
         people.add(Person(name = "Paweł Urban", age = 27))
+        people.add(Person(name = "Jan Kowalski", age = 35))
         dispatchRefresh()
     }
 

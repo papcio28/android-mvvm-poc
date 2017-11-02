@@ -1,12 +1,12 @@
-package com.urban.mvvmshowcase.viewmodel
+package com.urban.mvvmshowcase.person.create
 
 import android.databinding.BaseObservable
-import com.urban.mvvmshowcase.model.entity.Person
-import com.urban.mvvmshowcase.model.repository.PersonRepository
+import com.urban.mvvmshowcase.person.Person
+import com.urban.mvvmshowcase.person.PersonRepository
 
 class PersonCreateViewModel(private val peopleRepository: PersonRepository,
                             private var viewAccess: PersonCreateViewAccess?) :
-        BaseObservable(), ViewModel {
+        BaseObservable() {
     var person = Person()
     var personName
         get() = person.name

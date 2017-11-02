@@ -1,5 +1,7 @@
 package com.urban.mvvmshowcase.model.entity;
 
+import com.urban.mvvmshowcase.person.Person;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

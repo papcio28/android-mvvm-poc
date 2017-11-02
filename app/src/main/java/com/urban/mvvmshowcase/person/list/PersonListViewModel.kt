@@ -1,12 +1,12 @@
-package com.urban.mvvmshowcase.viewmodel
+package com.urban.mvvmshowcase.person.list
 
 import android.databinding.ObservableBoolean
-import com.urban.mvvmshowcase.model.entity.Person
-import com.urban.mvvmshowcase.model.repository.PersonRepository
+import com.urban.mvvmshowcase.person.Person
+import com.urban.mvvmshowcase.person.PersonRepository
 import io.reactivex.disposables.CompositeDisposable
 
 open class PersonListViewModel(private val personRepository: PersonRepository,
-                               var viewAccess: PersonListViewAccess?) : ViewModel {
+                               var viewAccess: PersonListViewAccess?) {
     val loading = ObservableBoolean(false)
     val disposables = CompositeDisposable()
 

@@ -1,10 +1,9 @@
-package com.urban.mvvmshowcase.view.activity.base;
+package com.urban.mvvmshowcase.android.base;
 
 import android.support.annotation.NonNull;
 
 import com.urban.mvvmshowcase.BuildConfig;
 import com.urban.mvvmshowcase.utility.ActivityUtil;
-import com.urban.mvvmshowcase.viewmodel.ViewModel;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.urban.mvvmshowcase.viewmodel.PersonCreateViewModel"/>
+            type="com.urban.mvvmshowcase.person.create.PersonCreateViewModel"/>
     </data>
 
     <LinearLayout

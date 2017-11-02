@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.view.activity
+package com.urban.mvvmshowcase.person.list
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -7,12 +7,11 @@ import android.view.MenuItem
 import com.urban.mvvmshowcase.R
 import com.urban.mvvmshowcase.android.MvvmApplication
 import com.urban.mvvmshowcase.databinding.ActivityMainBinding
-import com.urban.mvvmshowcase.model.entity.Person
-import com.urban.mvvmshowcase.view.activity.base.AbstractViewModelActivity
-import com.urban.mvvmshowcase.view.adapter.ClickListener
-import com.urban.mvvmshowcase.view.adapter.PeopleAdapter
-import com.urban.mvvmshowcase.viewmodel.PersonListViewAccess
-import com.urban.mvvmshowcase.viewmodel.PersonListViewModel
+import com.urban.mvvmshowcase.person.Person
+import com.urban.mvvmshowcase.person.create.CreatePersonActivity
+import com.urban.mvvmshowcase.android.base.AbstractViewModelActivity
+import com.urban.mvvmshowcase.person.list.adapter.ClickListener
+import com.urban.mvvmshowcase.person.list.adapter.PeopleAdapter
 
 class MainActivity : AbstractViewModelActivity<PersonListViewModel>(),
         ClickListener, PersonListViewAccess {

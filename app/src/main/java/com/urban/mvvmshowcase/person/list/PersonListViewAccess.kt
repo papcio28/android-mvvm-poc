@@ -1,4 +1,4 @@
-package com.urban.mvvmshowcase.viewmodel
+package com.urban.mvvmshowcase.person.list
 
 interface PersonListViewAccess {
     fun notifyDataChanged()
