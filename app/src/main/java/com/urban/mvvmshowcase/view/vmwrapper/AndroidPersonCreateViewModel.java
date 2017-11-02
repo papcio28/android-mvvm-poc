@@ -65,16 +65,6 @@ public class AndroidPersonCreateViewModel extends BaseObservable implements Savi
     }
 
     @Override
-    public void onShow() {
-        createViewModel.onShow();
-    }
-
-    @Override
-    public void onHide() {
-        createViewModel.onHide();
-    }
-
-    @Override
     public void onSaveState(Bundle state) {
         state.putString(STATE_KEY_NAME, getPerson().getName());
         state.putInt(STATE_KEY_AGE, getPerson().getAge());

@@ -18,8 +18,6 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
@@ -46,31 +44,6 @@ public class AbstractViewModelActivityTest {
 
         // assert
         assertNotNull(activity.vm());
-    }
-
-    @Test
-    public void viewModelGetsOnShowCallAfterActivityResume() {
-        // arrange
-        activity.setTestViewModel(viewModel);
-
-        // act
-        ActivityUtil.freshActivityStart(activityController);
-
-        // assert
-        verify(viewModel, times(1)).onShow();
-    }
-
-    @Test
-    public void viewModelGetsOnHideCallAfterActivityPause() {
-        // arrange
-        activity.setTestViewModel(viewModel);
-
-        // act
-        ActivityUtil.freshActivityStart(activityController)
-                .pause().stop().destroy();
-
-        // assert
-        verify(viewModel, times(1)).onHide();
     }
 
     @Test

@@ -31,17 +31,18 @@ public class PersonListViewModelTest {
     @Mock
     private PersonRepository peopleRepository;
     @Mock
-    private PersonListNavigator navigator;
+    private PersonListViewAccess peopleViewAccess;
+
     private PersonListViewModel viewModel;
 
     @Before
     public void setUp() {
-        viewModel = new PersonListViewModel(peopleRepository, navigator);
+        viewModel = new PersonListViewModel(peopleRepository, peopleViewAccess);
     }
 
     @Test
     public void shouldLoadOnFirstShow() {
-        assertTrue(viewModel.getLoading());
+        assertTrue(viewModel.getLoading().get());
     }
 
     @Test
@@ -50,65 +51,10 @@ public class PersonListViewModelTest {
         Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
 
         // when
-        viewModel.onShow();
         testSubject.onNext(Collections.<Person>emptyList());
 
         // then
-        assertFalse(viewModel.getLoading());
-    }
-
-    @Test
-    public void shouldNotifyObserverAboutListChange() {
-        // given
-        Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
-        PeopleListObserver mockObserver = mock(PeopleListObserver.class);
-        viewModel.setListObserver(mockObserver);
-
-        // when
-        viewModel.onShow();
-        testSubject.onNext(Collections.<Person>emptyList());
-
-        // then
-        verify(mockObserver, times(1)).onPeopleListChanged(ArgumentMatchers.<Person>anyList());
-    }
-
-    @Test
-    public void shouldReceiveLatestListWhenReused() {
-        // given
-        Subject<List<Person>> testSubject = configureRepositoryWithTestSubject();
-        PeopleListObserver mockObserver = mock(PeopleListObserver.class);
-        viewModel.setListObserver(mockObserver);
-
-        // when : first usage
-        viewModel.onShow();
-        testSubject.onNext(Collections.<Person>emptyList());
-        viewModel.onHide();
-        viewModel.setListObserver(null);
-
-        // when : second usage
-        viewModel.setListObserver(mockObserver);
-        viewModel.onShow();
-
-        // then
-        verify(mockObserver, times(2)).onPeopleListChanged(ArgumentMatchers.<Person>anyList());
-    }
-
-    @Test
-    public void shouldUseNavigatorToOpenCreateScreen() {
-        // when
-        viewModel.openCreatePersonScreen();
-
-        // then
-        verify(navigator, times(1)).openCreatePersonScreen();
-    }
-
-    @Test
-    public void shouldUseNavigatorToOpenEditScreen() {
-        // when
-        viewModel.openEditPersonScreen(TEST_PERSON);
-
-        // then
-        verify(navigator, times(1)).openEditPersonScreen(eq(TEST_PERSON));
+        assertFalse(viewModel.getLoading().get());
     }
 
     private Subject<List<Person>> configureRepositoryWithTestSubject() {

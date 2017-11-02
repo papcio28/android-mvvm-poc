@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="vm"
-            type="com.urban.mvvmshowcase.view.vmwrapper.AndroidPersonListViewModel"/>
+            type="com.urban.mvvmshowcase.viewmodel.PersonListViewModel"/>
+
+        <variable
+            name="view"
+            type="com.urban.mvvmshowcase.view.activity.MainActivity"/>
 
         <import type="android.view.View"/>
     </data>
@@ -20,11 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="@{vm.loadingObservable ? View.VISIBLE : View.GONE}"/>
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/people_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:adapter="@{view.listAdapter}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
     </FrameLayout>
 </layout>

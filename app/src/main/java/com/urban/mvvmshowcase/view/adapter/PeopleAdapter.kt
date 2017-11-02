@@ -4,14 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.urban.mvvmshowcase.model.entity.Person
 
-class PeopleAdapter(val clickListener: ClickListener) :
+class PeopleAdapter(val clickListener: ClickListener, val people: List<Person>) :
         RecyclerView.Adapter<StandardOneLineViewHolder>() {
-    var people: List<Person> = emptyList()
-        get
-        set(list) {
-            field = list
-            notifyDataSetChanged()
-        }
 
     override fun onBindViewHolder(holder: StandardOneLineViewHolder, position: Int)
             = holder.bind(people[position])

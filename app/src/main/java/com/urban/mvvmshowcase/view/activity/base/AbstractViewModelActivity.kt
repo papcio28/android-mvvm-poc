@@ -16,15 +16,5 @@ abstract class AbstractViewModelActivity<out T : ViewModel> : AppCompatActivity(
         viewModel = lastCustomNonConfigurationInstance as? T? ?: createViewModel()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.onShow()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.onHide()
-    }
-
     override fun onRetainCustomNonConfigurationInstance() = viewModel
 }

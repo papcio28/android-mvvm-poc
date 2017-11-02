@@ -88,24 +88,6 @@ public class AndroidPersonCreateViewModelTest {
     }
 
     @Test
-    public void shouldCallBaseViewModelOnShow() {
-        // when
-        androidViewModel.onShow();
-
-        // then
-        verify(basicViewModel, times(1)).onShow();
-    }
-
-    @Test
-    public void shouldCallBaseViewModelOnHide() {
-        // when
-        androidViewModel.onHide();
-
-        // then
-        verify(basicViewModel, times(1)).onHide();
-    }
-
-    @Test
     public void shouldSavePersonDataWhenInstanceStateIsSaved() {
         // given
         Bundle savedState = new Bundle();

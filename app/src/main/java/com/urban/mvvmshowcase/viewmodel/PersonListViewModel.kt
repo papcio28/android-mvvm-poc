@@ -1,42 +1,30 @@
 package com.urban.mvvmshowcase.viewmodel
 
+import android.databinding.ObservableBoolean
 import com.urban.mvvmshowcase.model.entity.Person
 import com.urban.mvvmshowcase.model.repository.PersonRepository
-import io.reactivex.disposables.Disposable
-import java.lang.ref.WeakReference
-
-interface PersonListNavigator {
-    fun openCreatePersonScreen()
-    fun openEditPersonScreen(person: Person)
-}
-
-interface PeopleListObserver {
-    fun onPeopleListChanged(people: List<Person>)
-}
+import io.reactivex.disposables.CompositeDisposable
 
 open class PersonListViewModel(private val personRepository: PersonRepository,
-                               private val navigator: PersonListNavigator)
-    : ViewModel, PersonListNavigator by navigator {
-    open var loading = true
-        protected set
-    var listSubscription: Disposable? = null
-    private var dataObserver: WeakReference<PeopleListObserver?> =
-            WeakReference<PeopleListObserver?>(null)
+                               var viewAccess: PersonListViewAccess?) : ViewModel {
+    val loading = ObservableBoolean(false)
+    val disposables = CompositeDisposable()
 
-    fun setListObserver(observer: PeopleListObserver?) {
-        dataObserver = WeakReference(observer)
+    val people = mutableListOf<Person>()
+
+    fun loadPeople() {
+        disposables.add(personRepository.peopleList()
+                .doOnSubscribe { loading.set(true) }
+                .doOnNext { loading.set(false) }
+                .subscribe {
+                    people.clear()
+                    people.addAll(it)
+
+                    viewAccess?.notifyDataChanged()
+                })
     }
 
-    override fun onShow() {
-        loading = true
-        listSubscription = personRepository.peopleList().subscribe {
-            dataObserver.get()?.onPeopleListChanged(it)
-            loading = false
-        }
-    }
-
-    override fun onHide() {
-        listSubscription?.dispose()
-        listSubscription = null
+    fun cancelLoading() {
+        disposables.clear()
     }
 }

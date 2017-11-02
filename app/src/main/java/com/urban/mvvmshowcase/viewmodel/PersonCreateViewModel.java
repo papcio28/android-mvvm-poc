@@ -32,14 +32,4 @@ public class PersonCreateViewModel implements ViewModel {
         peopleRepository.save(person);
         navigator.hide();
     }
-
-    @Override
-    public void onShow() {
-        // no-op
-    }
-
-    @Override
-    public void onHide() {
-        // no-op
-    }
 }
